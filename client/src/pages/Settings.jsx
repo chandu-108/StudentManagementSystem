@@ -15,11 +15,11 @@ const TabButton = ({ id, label, icon: Icon, activeTab, onClick }) => (
     onClick={() => onClick(id)}
     className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors text-left ${
       activeTab === id
-        ? 'bg-indigo-500/10 text-indigo-600 border border-indigo-500/20'
+        ? 'bg-primary/10 text-primary border border-primary/20'
         : 'text-muted-foreground hover:bg-muted/30 hover:text-foreground'
     }`}
   >
-    <Icon size={18} className={activeTab === id ? 'text-indigo-500' : ''} />
+    <Icon size={18} className={activeTab === id ? 'text-primary' : ''} />
     {label}
   </button>
 );
@@ -33,11 +33,11 @@ const Toggle = ({ checked, onChange, label, description }) => (
     <button
       onClick={() => onChange(!checked)}
       className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ${
-        checked ? 'bg-indigo-500' : 'bg-muted'
+        checked ? 'bg-primary' : 'bg-muted'
       }`}
     >
       <span
-        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${
+        className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-background shadow ring-0 transition duration-200 ease-in-out ${
           checked ? 'translate-x-5' : 'translate-x-0'
         }`}
       />
@@ -127,12 +127,12 @@ const Settings = () => {
             animate={{ opacity: 1, y: 0 }}
             className="bg-card border border-border rounded-xl p-6 shadow-sm flex flex-col items-center text-center"
           >
-            <div className="w-20 h-20 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-500 font-bold text-4xl mb-3 border-4 border-background shadow-sm">
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-4xl mb-3 border-4 border-background shadow-sm">
               {user?.name?.charAt(0) || 'U'}
             </div>
             <h2 className="text-lg font-bold text-foreground">{user?.name || 'User'}</h2>
             <p className="text-muted-foreground text-sm mb-3">{user?.email}</p>
-            <span className="px-3 py-1 bg-indigo-500/10 text-indigo-600 rounded-full text-xs font-semibold uppercase tracking-wider">
+            <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold uppercase tracking-wider">
               {user?.role}
             </span>
           </motion.div>
@@ -155,7 +155,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <Monitor size={20} className="text-indigo-500" />
+                      <Monitor size={20} className="text-primary" />
                       Appearance
                     </h3>
                   </div>
@@ -185,7 +185,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <User size={20} className="text-indigo-500" />
+                      <User size={20} className="text-primary" />
                       Personal Information
                     </h3>
                   </div>
@@ -220,7 +220,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <Lock size={20} className="text-indigo-500" />
+                      <Lock size={20} className="text-primary" />
                       Change Password
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">Update your login password. Minimum 6 characters.</p>
@@ -242,7 +242,7 @@ const Settings = () => {
                             onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
                             placeholder="Enter current password"
                             required
-                            className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                            className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                           />
                           <button type="button" onClick={() => setShowPasswords(p => ({ ...p, current: !p.current }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                             {showPasswords.current ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -259,7 +259,7 @@ const Settings = () => {
                               onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
                               placeholder="Min. 6 characters"
                               required
-                              className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                              className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                             />
                             <button type="button" onClick={() => setShowPasswords(p => ({ ...p, new: !p.new }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                               {showPasswords.new ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -275,7 +275,7 @@ const Settings = () => {
                               onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
                               placeholder="Must match new password"
                               required
-                              className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
+                              className="w-full px-4 pr-12 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
                             />
                             <button type="button" onClick={() => setShowPasswords(p => ({ ...p, confirm: !p.confirm }))} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                               {showPasswords.confirm ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -284,7 +284,7 @@ const Settings = () => {
                         </div>
                       </div>
                       <div className="flex justify-end pt-2">
-                        <button type="submit" disabled={passwordLoading} className="flex items-center gap-2 px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-indigo-500/20 disabled:opacity-50">
+                        <button type="submit" disabled={passwordLoading} className="flex items-center gap-2 px-6 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-primary/20 disabled:opacity-50">
                           <KeyRound size={16} />
                           {passwordLoading ? 'Updating...' : 'Update Password'}
                         </button>
@@ -297,7 +297,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <Activity size={20} className="text-indigo-500" />
+                      <Activity size={20} className="text-primary" />
                       Active Session
                     </h3>
                   </div>
@@ -321,7 +321,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <ShieldCheck size={20} className="text-indigo-500" />
+                      <ShieldCheck size={20} className="text-primary" />
                       Security Tips
                     </h3>
                   </div>
@@ -333,7 +333,7 @@ const Settings = () => {
                       'Change your password regularly for better security.',
                     ].map((tip, i) => (
                       <div key={i} className="flex items-start gap-3 text-sm text-muted-foreground">
-                        <CheckCircle size={16} className="text-indigo-500 mt-0.5 flex-shrink-0" />
+                        <CheckCircle size={16} className="text-primary mt-0.5 flex-shrink-0" />
                         {tip}
                       </div>
                     ))}
@@ -349,7 +349,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <Bell size={20} className="text-indigo-500" />
+                      <Bell size={20} className="text-primary" />
                       In-App Notifications
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">Control which events trigger alerts inside the portal.</p>
@@ -372,7 +372,7 @@ const Settings = () => {
                 <div className="bg-card border border-border rounded-xl shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-border">
                     <h3 className="text-lg font-semibold text-foreground flex items-center gap-2">
-                      <MessageSquare size={20} className="text-indigo-500" />
+                      <MessageSquare size={20} className="text-primary" />
                       External Channels
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">Choose how you want to be notified outside the portal.</p>
@@ -386,8 +386,8 @@ const Settings = () => {
                 </div>
 
                 {/* Summary */}
-                <div className="bg-indigo-500/5 border border-indigo-500/20 rounded-xl p-5 flex items-start gap-3">
-                  <CheckCircle size={20} className="text-indigo-500 mt-0.5 flex-shrink-0" />
+                <div className="bg-primary/5 border border-primary/20 rounded-xl p-5 flex items-start gap-3">
+                  <CheckCircle size={20} className="text-primary mt-0.5 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-foreground text-sm">Preferences auto-saved</p>
                     <p className="text-xs text-muted-foreground mt-0.5">Your notification preferences are saved immediately and persist across sessions.</p>

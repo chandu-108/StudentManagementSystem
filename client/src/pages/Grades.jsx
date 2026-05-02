@@ -125,7 +125,7 @@ const Grades = () => {
         <button 
           onClick={handleSaveGrades}
           disabled={saving || loading}
-          className="flex items-center gap-2 px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-indigo-500/20 disabled:opacity-50"
+          className="flex items-center gap-2 px-6 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-primary/20 disabled:opacity-50"
         >
           {saving ? 'Saving...' : (
             <>
@@ -142,7 +142,7 @@ const Grades = () => {
           <select 
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="w-full appearance-none pl-10 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer"
+            className="w-full appearance-none pl-10 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer"
           >
             <option>Mathematics</option>
             <option>Physics</option>
@@ -158,7 +158,7 @@ const Grades = () => {
           <select 
             value={examType}
             onChange={(e) => setExamType(e.target.value)}
-            className="w-full appearance-none pl-10 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer"
+            className="w-full appearance-none pl-10 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer"
           >
             <option>Mid-term</option>
             <option>Final</option>
@@ -175,7 +175,7 @@ const Grades = () => {
               type="number"
               value={totalMarks}
               onChange={(e) => setTotalMarks(e.target.value)}
-              className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm font-bold"
+              className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm font-bold"
             />
             <Hash size={16} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           </div>
@@ -206,7 +206,7 @@ const Grades = () => {
                   <div key={student._id} className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-muted/50 transition-colors">
                     {/* Student Info */}
                     <div className="flex items-center gap-4 min-w-[300px]">
-                      <div className="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-500 font-bold flex-shrink-0 text-lg">
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0 text-lg">
                         {student.user?.name?.charAt(0) || 'S'}
                       </div>
                       <div>
@@ -227,7 +227,7 @@ const Grades = () => {
                           value={marks}
                           onChange={(e) => handleMarksChange(student._id, e.target.value)}
                           placeholder="0"
-                          className="w-20 text-center px-3 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-semibold"
+                          className="w-20 text-center px-3 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary font-semibold"
                         />
                         <span className="text-muted-foreground font-medium">/ {totalMarks}</span>
                       </div>

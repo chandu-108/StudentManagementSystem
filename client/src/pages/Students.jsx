@@ -225,7 +225,7 @@ const Students = () => {
           {user?.role === 'Admin' && (
             <button 
               onClick={() => setShowModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium shadow-sm shadow-indigo-500/20"
+              className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors text-sm font-medium shadow-sm shadow-primary/20"
             >
               <Plus size={16} />
               Add Student
@@ -243,7 +243,7 @@ const Students = () => {
             placeholder="Search by name, email, enrollment..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-transparent border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+            className="w-full pl-10 pr-4 py-2 bg-transparent border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
           />
         </div>
         
@@ -252,21 +252,21 @@ const Students = () => {
             <select 
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
-              className="w-full appearance-none pl-4 pr-10 py-2 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer"
+              className="w-full appearance-none pl-4 pr-10 py-2 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer"
             >
               <option>All Departments</option>
               <option>Computer Science</option>
               <option>Mechanical</option>
               <option>Electrical</option>
             </select>
-            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           </div>
           
           <div className="relative min-w-[120px]">
             <select 
               value={yearFilter}
               onChange={(e) => setYearFilter(e.target.value)}
-              className="w-full appearance-none pl-4 pr-10 py-2 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer"
+              className="w-full appearance-none pl-4 pr-10 py-2 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer"
             >
               <option>All Years</option>
               <option>Year 1</option>
@@ -274,7 +274,7 @@ const Students = () => {
               <option>Year 3</option>
               <option>Year 4</option>
             </select>
-            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
           </div>
         </div>
       </div>
@@ -284,13 +284,13 @@ const Students = () => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-left">
             <thead>
-              <tr className="bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-transparent border-b border-border">
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest">Student</th>
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest">Department</th>
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest">Year / Section</th>
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest">Attendance</th>
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest">CGPA</th>
-                <th className="px-6 py-4 text-xs font-bold text-indigo-600 uppercase tracking-widest text-right">Actions</th>
+              <tr className="bg-gradient-to-r from-primary/10 via-purple-500/5 to-transparent border-b border-border">
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest">Student</th>
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest">Department</th>
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest">Year / Section</th>
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest">Attendance</th>
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest">CGPA</th>
+                <th className="px-6 py-4 text-xs font-bold text-primary uppercase tracking-widest text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -319,7 +319,7 @@ const Students = () => {
                   const pct = overallAttendance[student._id];
                   const isGood = pct !== undefined && pct >= 75;
                   const avatarColors = [
-                    'bg-indigo-500/10 text-indigo-600',
+                    'bg-primary/10 text-primary',
                     'bg-violet-500/10 text-violet-600',
                     'bg-emerald-500/10 text-emerald-600',
                     'bg-amber-500/10 text-amber-600',
@@ -331,7 +331,7 @@ const Students = () => {
                   return (
                     <tr
                       key={student._id}
-                      className="group hover:bg-indigo-500/3 transition-all duration-150"
+                      className="group hover:bg-primary/5 transition-all duration-150"
                     >
                       {/* Student Cell */}
                       <td className="px-6 py-4">
@@ -348,7 +348,7 @@ const Students = () => {
 
                       {/* Department */}
                       <td className="px-6 py-4">
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-500/8 text-foreground border border-border">
+                        <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-muted text-foreground border border-border">
                           {student.department}
                         </span>
                       </td>
@@ -356,7 +356,7 @@ const Students = () => {
                       {/* Year / Section */}
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <span className="w-7 h-7 rounded-lg bg-indigo-500/10 text-indigo-600 text-xs font-bold flex items-center justify-center">
+                          <span className="w-7 h-7 rounded-lg bg-primary/10 text-primary text-xs font-bold flex items-center justify-center">
                             {student.year}
                           </span>
                           <span className="text-xs text-muted-foreground font-medium">Year · Sec {student.section}</span>
@@ -391,7 +391,7 @@ const Students = () => {
                           <button
                             onClick={() => setViewingStudent(student)}
                             title="View"
-                            className="p-2 rounded-lg hover:bg-indigo-500/10 hover:text-indigo-600 text-muted-foreground transition-colors"
+                            className="p-2 rounded-lg hover:bg-primary/10 hover:text-primary text-muted-foreground transition-colors"
                           >
                             <Eye size={16} />
                           </button>
@@ -437,13 +437,13 @@ const Students = () => {
 
       {/* Add Student Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900">Add Student</h2>
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
+            <div className="px-6 py-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Add Student</h2>
               <button 
                 onClick={() => setShowModal(false)}
-                className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-full hover:bg-slate-100"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded-full hover:bg-muted"
               >
                 <X size={20} />
               </button>
@@ -458,92 +458,92 @@ const Students = () => {
               
               <form id="add-student-form" onSubmit={handleAddStudent} className="space-y-5">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Full name</label>
+                  <label className="text-sm font-medium text-foreground">Full name</label>
                   <input
                     type="text" name="name" value={formData.name} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Email</label>
+                    <label className="text-sm font-medium text-foreground">Email</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Phone</label>
+                    <label className="text-sm font-medium text-foreground">Phone</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Enrollment #</label>
+                  <label className="text-sm font-medium text-foreground">Enrollment #</label>
                   <input
                     type="text" name="enrollmentNumber" value={formData.enrollmentNumber} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Department</label>
+                  <label className="text-sm font-medium text-foreground">Department</label>
                   <div className="relative">
                     <select 
                       name="department" value={formData.department} onChange={handleInputChange}
-                      className="w-full appearance-none px-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900 cursor-pointer"
+                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                     >
                       <option>Computer Science</option>
                       <option>Mechanical</option>
                       <option>Electrical</option>
                     </select>
-                    <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Year</label>
+                    <label className="text-sm font-medium text-foreground">Year</label>
                     <div className="relative">
                       <select 
                         name="year" value={formData.year} onChange={handleInputChange}
-                        className="w-full appearance-none px-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900 cursor-pointer"
+                        className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                       >
                         <option>Year 1</option>
                         <option>Year 2</option>
                         <option>Year 3</option>
                         <option>Year 4</option>
                       </select>
-                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Section</label>
+                    <label className="text-sm font-medium text-foreground">Section</label>
                     <div className="relative">
                       <select 
                         name="section" value={formData.section} onChange={handleInputChange}
-                        className="w-full appearance-none px-4 py-2.5 bg-white border border-indigo-500 ring-2 ring-indigo-500/20 rounded-lg focus:outline-none text-slate-900 cursor-pointer"
+                        className="w-full appearance-none px-4 py-2.5 bg-background border border-primary ring-2 ring-primary/25 rounded-lg focus:outline-none text-foreground cursor-pointer"
                       >
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
                       </select>
-                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-500 pointer-events-none" />
+                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                     </div>
                   </div>
                 </div>
               </form>
             </div>
             
-            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-3">
+            <div className="px-6 py-4 border-t border-border bg-muted flex items-center justify-end gap-3">
               <button 
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="px-5 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm"
+                className="px-5 py-2.5 text-sm font-medium text-foreground bg-background border border-border rounded-lg hover:bg-muted/80 transition-colors shadow-sm"
               >
                 Cancel
               </button>
@@ -551,7 +551,7 @@ const Students = () => {
                 type="submit"
                 form="add-student-form"
                 disabled={formLoading}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-lg transition-all shadow-sm shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="px-5 py-2.5 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 border border-transparent rounded-lg transition-all shadow-sm shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ring-offset-background"
               >
                 {formLoading ? 'Adding...' : 'Add student'}
               </button>
@@ -562,13 +562,13 @@ const Students = () => {
 
       {/* Edit Student Modal */}
       {editingStudent && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900">Edit Student</h2>
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
+            <div className="px-6 py-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Edit Student</h2>
               <button 
                 onClick={() => setEditingStudent(null)}
-                className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-full hover:bg-slate-100"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded-full hover:bg-muted"
               >
                 <X size={20} />
               </button>
@@ -583,92 +583,92 @@ const Students = () => {
               
               <form id="edit-student-form" onSubmit={handleUpdateStudent} className="space-y-5">
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Full name</label>
+                  <label className="text-sm font-medium text-foreground">Full name</label>
                   <input
                     type="text" name="name" value={formData.name} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Email</label>
+                    <label className="text-sm font-medium text-foreground">Email</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Phone</label>
+                    <label className="text-sm font-medium text-foreground">Phone</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Enrollment #</label>
+                  <label className="text-sm font-medium text-foreground">Enrollment #</label>
                   <input
                     type="text" name="enrollmentNumber" value={formData.enrollmentNumber} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-slate-900 bg-white rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-sm font-medium text-slate-700">Department</label>
+                  <label className="text-sm font-medium text-foreground">Department</label>
                   <div className="relative">
                     <select 
                       name="department" value={formData.department} onChange={handleInputChange}
-                      className="w-full appearance-none px-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900 cursor-pointer"
+                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                     >
                       <option>Computer Science</option>
                       <option>Mechanical</option>
                       <option>Electrical</option>
                     </select>
-                    <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                    <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Year</label>
+                    <label className="text-sm font-medium text-foreground">Year</label>
                     <div className="relative">
                       <select 
                         name="year" value={formData.year} onChange={handleInputChange}
-                        className="w-full appearance-none px-4 py-2.5 bg-white border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-slate-900 cursor-pointer"
+                        className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                       >
                         <option>Year 1</option>
                         <option>Year 2</option>
                         <option>Year 3</option>
                         <option>Year 4</option>
                       </select>
-                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none" />
                     </div>
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-sm font-medium text-slate-700">Section</label>
+                    <label className="text-sm font-medium text-foreground">Section</label>
                     <div className="relative">
                       <select 
                         name="section" value={formData.section} onChange={handleInputChange}
-                        className="w-full appearance-none px-4 py-2.5 bg-white border border-indigo-500 ring-2 ring-indigo-500/20 rounded-lg focus:outline-none text-slate-900 cursor-pointer"
+                        className="w-full appearance-none px-4 py-2.5 bg-background border border-primary ring-2 ring-primary/25 rounded-lg focus:outline-none text-foreground cursor-pointer"
                       >
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
                       </select>
-                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-500 pointer-events-none" />
+                      <ChevronDown size={18} className="absolute right-3 top-1/2 -translate-y-1/2 text-primary pointer-events-none" />
                     </div>
                   </div>
                 </div>
               </form>
             </div>
             
-            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-3">
+            <div className="px-6 py-4 border-t border-border bg-muted flex items-center justify-end gap-3">
               <button 
                 type="button"
                 onClick={() => setEditingStudent(null)}
-                className="px-5 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm"
+                className="px-5 py-2.5 text-sm font-medium text-foreground bg-background border border-border rounded-lg hover:bg-muted/80 transition-colors shadow-sm"
               >
                 Cancel
               </button>
@@ -676,7 +676,7 @@ const Students = () => {
                 type="submit"
                 form="edit-student-form"
                 disabled={formLoading}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-lg transition-all shadow-sm shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="px-5 py-2.5 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 border border-transparent rounded-lg transition-all shadow-sm shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ring-offset-background"
               >
                 {formLoading ? 'Updating...' : 'Update student'}
               </button>
@@ -687,13 +687,13 @@ const Students = () => {
 
       {/* View Student Modal */}
       {viewingStudent && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
-            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-slate-900">Student Details</h2>
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-card rounded-2xl shadow-xl w-full max-w-md overflow-hidden flex flex-col">
+            <div className="px-6 py-4 border-b border-border flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Student Details</h2>
               <button 
                 onClick={() => setViewingStudent(null)}
-                className="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-full hover:bg-slate-100"
+                className="text-muted-foreground hover:text-foreground transition-colors p-1 rounded-full hover:bg-muted"
               >
                 <X size={20} />
               </button>
@@ -701,49 +701,49 @@ const Students = () => {
             
             <div className="p-6">
               <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-2xl flex-shrink-0">
+                <div className="w-16 h-16 rounded-full bg-primary/15 flex items-center justify-center text-primary font-bold text-2xl flex-shrink-0">
                   {viewingStudent.user?.name?.charAt(0) || 'S'}
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">{viewingStudent.user?.name}</h3>
-                  <p className="text-slate-500">{viewingStudent.user?.email}</p>
+                  <h3 className="text-xl font-bold text-foreground">{viewingStudent.user?.name}</h3>
+                  <p className="text-muted-foreground">{viewingStudent.user?.email}</p>
                 </div>
               </div>
 
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-slate-500 font-medium">Enrollment #</p>
-                    <p className="text-slate-900 font-medium">{viewingStudent.enrollmentNumber}</p>
+                    <p className="text-sm text-muted-foreground font-medium">Enrollment #</p>
+                    <p className="text-foreground font-medium">{viewingStudent.enrollmentNumber}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500 font-medium">Phone</p>
-                    <p className="text-slate-900 font-medium">{viewingStudent.phone}</p>
+                    <p className="text-sm text-muted-foreground font-medium">Phone</p>
+                    <p className="text-foreground font-medium">{viewingStudent.phone}</p>
                   </div>
                 </div>
                 
                 <div>
-                  <p className="text-sm text-slate-500 font-medium">Department</p>
-                  <p className="text-slate-900 font-medium">{viewingStudent.department}</p>
+                  <p className="text-sm text-muted-foreground font-medium">Department</p>
+                  <p className="text-foreground font-medium">{viewingStudent.department}</p>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-sm text-slate-500 font-medium">Year</p>
-                    <p className="text-slate-900 font-medium">{viewingStudent.year}</p>
+                    <p className="text-sm text-muted-foreground font-medium">Year</p>
+                    <p className="text-foreground font-medium">{viewingStudent.year}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-slate-500 font-medium">Section</p>
-                    <p className="text-slate-900 font-medium">{viewingStudent.section}</p>
+                    <p className="text-sm text-muted-foreground font-medium">Section</p>
+                    <p className="text-foreground font-medium">{viewingStudent.section}</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+            <div className="px-6 py-4 border-t border-border bg-muted flex justify-end">
               <button 
                 onClick={() => setViewingStudent(null)}
-                className="px-5 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-sm"
+                className="px-5 py-2.5 text-sm font-medium text-foreground bg-background border border-border rounded-lg hover:bg-muted/80 transition-colors shadow-sm"
               >
                 Close
               </button>

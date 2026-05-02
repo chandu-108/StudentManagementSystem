@@ -13,21 +13,9 @@ const Layout = ({ children }) => {
   }, [location.pathname]);
 
   return (
-    <div
-      className="flex min-h-screen"
-      style={{ background: 'hsl(230 35% 5%)' }}
-    >
-      {/* Ambient background mesh */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          backgroundImage: `
-            radial-gradient(ellipse 80% 60% at 15% 15%, hsl(258 90% 66% / 0.07) 0%, transparent 55%),
-            radial-gradient(ellipse 70% 50% at 85% 85%, hsl(186 100% 50% / 0.05) 0%, transparent 55%),
-            radial-gradient(ellipse 50% 40% at 60% 30%, hsl(330 90% 65% / 0.04) 0%, transparent 50%)
-          `,
-        }}
-      />
+    <div className="flex min-h-screen bg-background">
+      {/* Ambient background mesh — follows :root / .dark tokens */}
+      <div className="fixed inset-0 pointer-events-none z-0 bg-mesh" aria-hidden />
 
       {/* ── Desktop Sidebar (always visible ≥ lg) ── */}
       <div className="hidden lg:flex flex-shrink-0 sticky top-0 h-screen z-10">

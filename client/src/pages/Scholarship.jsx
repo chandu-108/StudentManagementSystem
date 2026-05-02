@@ -178,7 +178,7 @@ const AssignScholarshipModal = ({ isOpen, onClose, students, onSubmit, loading }
                               <p className="font-medium">{student.user?.name}</p>
                               <p className="text-xs text-muted-foreground">{student.department} — Year {student.year}</p>
                             </div>
-                            {formData.studentId === student._id && <Check size={16} className="text-indigo-500" />}
+                            {formData.studentId === student._id && <Check size={16} className="text-primary" />}
                           </button>
                         ))
                       ) : (
@@ -200,7 +200,7 @@ const AssignScholarshipModal = ({ isOpen, onClose, students, onSubmit, loading }
                 value={formData.scholarshipName}
                 onChange={(e) => setFormData(prev => ({ ...prev, scholarshipName: e.target.value }))}
                 placeholder="e.g., Merit Scholarship"
-                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm"
+                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm"
               />
             </div>
 
@@ -216,7 +216,7 @@ const AssignScholarshipModal = ({ isOpen, onClose, students, onSubmit, loading }
                   value={formData.amount}
                   onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                   placeholder="10000"
-                  className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm"
+                  className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm"
                 />
               </div>
             </div>
@@ -262,7 +262,7 @@ const AssignScholarshipModal = ({ isOpen, onClose, students, onSubmit, loading }
                 onChange={(e) => setFormData(prev => ({ ...prev, remarks: e.target.value }))}
                 placeholder="Optional notes..."
                 rows={3}
-                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm resize-none"
+                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm resize-none"
               />
             </div>
 
@@ -278,7 +278,7 @@ const AssignScholarshipModal = ({ isOpen, onClose, students, onSubmit, loading }
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 text-white rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground rounded-lg transition-colors text-sm font-medium flex items-center justify-center gap-2"
               >
                 {loading ? 'Assigning...' : <><Plus size={16} /> Assign</>}
               </button>
@@ -346,7 +346,7 @@ const MoveToSelectedDialog = ({ isOpen, scholarship, onClose, onSubmit, loading 
                 type="text"
                 value={formData.scholarshipName}
                 onChange={(e) => setFormData(prev => ({ ...prev, scholarshipName: e.target.value }))}
-                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm"
+                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm"
               />
             </div>
 
@@ -360,7 +360,7 @@ const MoveToSelectedDialog = ({ isOpen, scholarship, onClose, onSubmit, loading 
                   type="number"
                   value={formData.amount}
                   onChange={(e) => setFormData(prev => ({ ...prev, amount: e.target.value }))}
-                  className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm"
+                  className="w-full pl-8 pr-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm"
                 />
               </div>
             </div>
@@ -373,7 +373,7 @@ const MoveToSelectedDialog = ({ isOpen, scholarship, onClose, onSubmit, loading 
                 value={formData.remarks}
                 onChange={(e) => setFormData(prev => ({ ...prev, remarks: e.target.value }))}
                 rows={3}
-                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm resize-none"
+                className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm resize-none"
               />
             </div>
 
@@ -388,7 +388,7 @@ const MoveToSelectedDialog = ({ isOpen, scholarship, onClose, onSubmit, loading 
               <button
                 type="submit"
                 disabled={loading}
-                className="flex-1 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 disabled:opacity-50 text-white rounded-lg transition-colors text-sm font-medium"
+                className="flex-1 px-4 py-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground rounded-lg transition-colors text-sm font-medium"
               >
                 {loading ? 'Moving...' : 'Move'}
               </button>
@@ -586,7 +586,7 @@ const Scholarship = () => {
         {isAdmin && (
           <button
             onClick={() => setShowAssignModal(true)}
-            className="flex items-center gap-2 px-6 py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-indigo-500/20 whitespace-nowrap"
+            className="flex items-center gap-2 px-6 py-2.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors text-sm font-semibold shadow-sm shadow-primary/20 whitespace-nowrap"
           >
             <Plus size={18} />
             Assign Scholarship
@@ -608,7 +608,7 @@ const Scholarship = () => {
               icon={TrendingUp}
               title="Total Students Assessed"
               value={stats.total}
-              color="bg-slate-500/10 text-slate-600"
+              color="bg-muted text-muted-foreground"
               animationDelay={0}
             />
             <KPICard
@@ -650,14 +650,14 @@ const Scholarship = () => {
           >
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-medium text-foreground">Scholarship Disbursement Progress</p>
-              <p className="text-sm font-semibold text-indigo-600">₹{stats.sanctionedAmount.toLocaleString()} of ₹{stats.totalAmount.toLocaleString()}</p>
+              <p className="text-sm font-semibold text-primary">₹{stats.sanctionedAmount.toLocaleString()} of ₹{stats.totalAmount.toLocaleString()}</p>
             </div>
             <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: stats.totalAmount > 0 ? `${(stats.sanctionedAmount / stats.totalAmount) * 100}%` : 0 }}
                 transition={{ delay: 0.6, duration: 1 }}
-                className="h-full bg-gradient-to-r from-indigo-500 to-blue-500"
+                className="h-full bg-gradient-to-r from-primary to-blue-500"
               />
             </div>
           </motion.div>
@@ -679,7 +679,7 @@ const Scholarship = () => {
                 onClick={() => setActiveTab('selected')}
                 className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors ${
                   activeTab === 'selected'
-                    ? 'bg-indigo-500/10 text-indigo-600 border-b-2 border-indigo-500'
+                    ? 'bg-primary/10 text-primary border-b-2 border-primary'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -689,7 +689,7 @@ const Scholarship = () => {
                 onClick={() => setActiveTab('notSelected')}
                 className={`flex-1 px-6 py-4 text-sm font-semibold transition-colors ${
                   activeTab === 'notSelected'
-                    ? 'bg-indigo-500/10 text-indigo-600 border-b-2 border-indigo-500'
+                    ? 'bg-primary/10 text-primary border-b-2 border-primary'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -709,7 +709,7 @@ const Scholarship = () => {
                 placeholder={`Search ${activeTab === 'selected' ? 'selected' : 'not selected'} students...`}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-transparent border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors text-sm"
+                className="w-full pl-10 pr-4 py-2 bg-transparent border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors text-sm"
               />
             </div>
           </div>
@@ -823,7 +823,7 @@ const Scholarship = () => {
                               ) : scholarship.sanctionStatus === 'Sanctioned' && !scholarship.reimbursementPaid ? (
                                 <button
                                   onClick={() => handleMarkAsPaid(scholarship._id)}
-                                  className="px-3 py-1.5 text-xs font-medium bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/20 rounded-lg transition-colors whitespace-nowrap"
+                                  className="px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors whitespace-nowrap"
                                 >
                                   Mark as Paid
                                 </button>
@@ -836,7 +836,7 @@ const Scholarship = () => {
                                   setSelectedScholarship(scholarship);
                                   setShowMoveDialog(true);
                                 }}
-                                className="px-3 py-1.5 text-xs font-medium bg-indigo-500/10 text-indigo-600 hover:bg-indigo-500/20 rounded-lg transition-colors whitespace-nowrap"
+                                className="px-3 py-1.5 text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 rounded-lg transition-colors whitespace-nowrap"
                               >
                                 Move to Selected
                               </button>
@@ -910,7 +910,7 @@ const Scholarship = () => {
                   value={sanctionPopover.remarks}
                   onChange={(e) => setSanctionPopover({ ...sanctionPopover, remarks: e.target.value })}
                   rows={3}
-                  className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm resize-none"
+                  className="w-full px-4 py-2 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm resize-none"
                   placeholder="Add remarks here..."
                 />
               </div>

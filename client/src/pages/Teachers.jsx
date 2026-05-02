@@ -112,7 +112,7 @@ const Teachers = () => {
         {user?.role === 'Admin' && (
           <button 
             onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-500 hover:bg-indigo-600 text-white rounded-lg transition-colors text-sm font-medium shadow-sm shadow-indigo-500/20"
+            className="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg transition-colors text-sm font-medium shadow-sm shadow-primary/20"
           >
             <Plus size={16} />
             Add Teacher
@@ -132,7 +132,7 @@ const Teachers = () => {
           {teachers.map((teacher) => (
             <div key={teacher._id} className="bg-card border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
               {/* Banner Top Half */}
-              <div className="h-24 bg-gradient-to-r from-purple-500 to-indigo-500 relative rounded-t-xl">
+              <div className="h-24 bg-gradient-to-r from-purple-500 to-primary relative rounded-t-xl">
                 {/* Admin Actions */}
                 {user?.role === 'Admin' && (
                   <div className="absolute top-3 right-3 flex gap-2">
@@ -151,7 +151,7 @@ const Teachers = () => {
                   </div>
                 )}
                 {/* Avatar (overlapping banner) */}
-                <div className="absolute -bottom-8 left-6 w-16 h-16 rounded-full border-4 border-card bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-2xl shadow-sm">
+                <div className="absolute -bottom-8 left-6 w-16 h-16 rounded-full border-4 border-card bg-primary/15 flex items-center justify-center text-primary font-bold text-2xl shadow-sm">
                   {teacher.user?.name?.charAt(0) || 'T'}
                 </div>
               </div>
@@ -168,7 +168,7 @@ const Teachers = () => {
                 
                 {/* Subjects */}
                 <div className="mt-auto pt-4 border-t border-border flex items-start gap-2">
-                  <BookOpen size={16} className="text-indigo-500 mt-0.5 flex-shrink-0" />
+                  <BookOpen size={16} className="text-primary mt-0.5 flex-shrink-0" />
                   <div className="flex flex-wrap gap-2">
                     {teacher.subjects && teacher.subjects.length > 0 ? (
                       teacher.subjects.map((subject, index) => (
@@ -189,7 +189,7 @@ const Teachers = () => {
 
       {/* Add Teacher Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
             <div className="px-6 py-4 border-b border-border flex items-center justify-between">
               <h2 className="text-xl font-semibold text-foreground">Add Teacher</h2>
@@ -213,7 +213,7 @@ const Teachers = () => {
                   <label className="text-sm font-medium text-foreground">Full name</label>
                   <input
                     type="text" name="name" value={formData.name} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
                 
@@ -222,14 +222,14 @@ const Teachers = () => {
                     <label className="text-sm font-medium text-foreground">Email</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-foreground">Phone</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
@@ -238,7 +238,7 @@ const Teachers = () => {
                   <label className="text-sm font-medium text-foreground">Employee ID</label>
                   <input
                     type="text" name="employeeId" value={formData.employeeId} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
 
@@ -247,7 +247,7 @@ const Teachers = () => {
                   <div className="relative">
                     <select 
                       name="department" value={formData.department} onChange={handleInputChange}
-                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-foreground cursor-pointer"
+                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                     >
                       <option>Computer Science</option>
                       <option>Mechanical</option>
@@ -263,7 +263,7 @@ const Teachers = () => {
                   <input
                     type="text" name="subjects" value={formData.subjects} onChange={handleInputChange}
                     placeholder="e.g. Programming, Data Structures"
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
               </form>
@@ -281,7 +281,7 @@ const Teachers = () => {
                 type="submit"
                 form="add-teacher-form"
                 disabled={formLoading}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-lg transition-all shadow-sm shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                className="px-5 py-2.5 text-sm font-medium text-white bg-primary hover:bg-primary/90 border border-transparent rounded-lg transition-all shadow-sm shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ring-offset-background disabled:opacity-50"
               >
                 {formLoading ? 'Adding...' : 'Add teacher'}
               </button>
@@ -292,7 +292,7 @@ const Teachers = () => {
 
       {/* Edit Teacher Modal */}
       {editingTeacher && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-card rounded-2xl shadow-xl w-full max-w-lg overflow-hidden flex flex-col">
             <div className="px-6 py-4 border-b border-border flex items-center justify-between">
               <h2 className="text-xl font-semibold text-foreground">Edit Teacher</h2>
@@ -316,7 +316,7 @@ const Teachers = () => {
                   <label className="text-sm font-medium text-foreground">Full name</label>
                   <input
                     type="text" name="name" value={formData.name} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
                 
@@ -325,14 +325,14 @@ const Teachers = () => {
                     <label className="text-sm font-medium text-foreground">Email</label>
                     <input
                       type="email" name="email" value={formData.email} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-foreground">Phone</label>
                     <input
                       type="tel" name="phone" value={formData.phone} onChange={handleInputChange} required
-                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                      className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                     />
                   </div>
                 </div>
@@ -341,7 +341,7 @@ const Teachers = () => {
                   <label className="text-sm font-medium text-foreground">Employee ID</label>
                   <input
                     type="text" name="employeeId" value={formData.employeeId} onChange={handleInputChange} required
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
 
@@ -350,7 +350,7 @@ const Teachers = () => {
                   <div className="relative">
                     <select 
                       name="department" value={formData.department} onChange={handleInputChange}
-                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-foreground cursor-pointer"
+                      className="w-full appearance-none px-4 py-2.5 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-foreground cursor-pointer"
                     >
                       <option>Computer Science</option>
                       <option>Mechanical</option>
@@ -366,7 +366,7 @@ const Teachers = () => {
                   <input
                     type="text" name="subjects" value={formData.subjects} onChange={handleInputChange}
                     placeholder="e.g. Programming, Data Structures"
-                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+                    className="w-full px-4 py-2.5 text-foreground bg-background rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                   />
                 </div>
               </form>
@@ -384,7 +384,7 @@ const Teachers = () => {
                 type="submit"
                 form="edit-teacher-form"
                 disabled={formLoading}
-                className="px-5 py-2.5 text-sm font-medium text-white bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-lg transition-all shadow-sm shadow-indigo-500/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                className="px-5 py-2.5 text-sm font-medium text-white bg-primary hover:bg-primary/90 border border-transparent rounded-lg transition-all shadow-sm shadow-primary/20 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary ring-offset-background disabled:opacity-50"
               >
                 {formLoading ? 'Updating...' : 'Update teacher'}
               </button>

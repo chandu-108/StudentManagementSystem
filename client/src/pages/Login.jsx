@@ -86,11 +86,8 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen flex font-sans overflow-hidden"
-      style={{
-        background: 'hsl(230 35% 5%)',
-        fontFamily: "'Plus Jakarta Sans', sans-serif",
-      }}
+      className="min-h-screen flex font-sans overflow-hidden bg-background text-foreground"
+      style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}
     >
       {/* ── Left Panel — Hero ── */}
       <div
@@ -232,13 +229,7 @@ const Login = () => {
       </div>
 
       {/* ── Right Panel — Auth ── */}
-      <div
-        className="w-full md:w-[48%] flex items-center justify-center p-6 sm:p-10 relative overflow-y-auto"
-        style={{
-          background: 'hsl(228 30% 7%)',
-          borderLeft: '1px solid hsl(228 28% 13%)',
-        }}
-      >
+      <div className="w-full md:w-[48%] flex items-center justify-center p-6 sm:p-10 relative overflow-y-auto bg-background border-l border-border">
         {/* Ambient glow behind form */}
         <div
           className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
@@ -262,26 +253,23 @@ const Login = () => {
               <Sparkles size={18} className="text-white" />
             </div>
             <div>
-              <p className="text-white font-extrabold text-base tracking-tight leading-none">StudentManagementSystem</p>
-              <p className="text-[10px] font-bold uppercase tracking-widest leading-none mt-0.5" style={{ color: 'hsl(258 60% 70%)' }}>Smart Portal</p>
+              <p className="text-foreground font-extrabold text-base tracking-tight leading-none">StudentManagementSystem</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest leading-none mt-0.5 text-primary">Smart Portal</p>
             </div>
           </div>
 
           {/* Heading */}
           <div className="mb-8">
-            <h2 className="text-[28px] font-black text-white leading-tight tracking-tight mb-1.5">
+            <h2 className="text-[28px] font-black text-foreground leading-tight tracking-tight mb-1.5">
               {isLogin ? 'Welcome back 👋' : 'Create account ✨'}
             </h2>
-            <p className="text-[14px]" style={{ color: 'hsl(228 20% 50%)' }}>
+            <p className="text-[14px] text-muted-foreground">
               {isLogin ? 'Sign in to access your personalized dashboard' : 'Join StudentManagementSystem and get started today'}
             </p>
           </div>
 
           {/* Role selector */}
-          <div
-            className="flex p-1 rounded-2xl mb-7 gap-1"
-            style={{ background: 'hsl(228 30% 10%)', border: '1px solid hsl(228 28% 16%)' }}
-          >
+          <div className="flex p-1 rounded-2xl mb-7 gap-1 bg-muted/80 border border-border">
             {ROLE_TABS.map((tab) => (
               <button
                 key={tab.id}
@@ -289,12 +277,13 @@ const Login = () => {
                   setRole(tab.id);
                   if (tab.id === 'Admin') setIsLogin(true);
                 }}
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl text-[12px] font-bold transition-all duration-200"
+                className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl text-[12px] font-bold transition-all duration-200 ${
+                  role === tab.id ? 'text-foreground shadow-sm' : 'text-muted-foreground'
+                }`}
                 style={{
                   background: role === tab.id ? tab.activeBg : 'transparent',
                   border: `1px solid ${role === tab.id ? tab.activeBorder : 'transparent'}`,
-                  color: role === tab.id ? 'white' : 'hsl(228 20% 45%)',
-                  boxShadow: role === tab.id ? `0 0 16px ${tab.glow} / 0.15` : 'none',
+                  boxShadow: role === tab.id ? `0 0 16px ${tab.glow}40` : 'none',
                 }}
               >
                 <tab.icon size={14} className={role === tab.id ? tab.activeText : ''} />
@@ -305,14 +294,7 @@ const Login = () => {
 
           {/* Error */}
           {error && (
-            <div
-              className="mb-5 px-4 py-3.5 rounded-xl text-[13px] font-medium"
-              style={{
-                background: 'hsl(0 84% 60% / 0.1)',
-                border: '1px solid hsl(0 84% 60% / 0.25)',
-                color: 'hsl(0 80% 70%)',
-              }}
-            >
+            <div className="mb-5 px-4 py-3.5 rounded-xl text-[13px] font-medium bg-destructive/10 border border-destructive/25 text-destructive">
               ⚠️ {error}
             </div>
           )}
@@ -321,7 +303,7 @@ const Login = () => {
           <form onSubmit={handleSubmit} className="space-y-4" autoComplete="off">
             {!isLogin && (
               <div>
-                <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider" style={{ color: 'hsl(228 20% 50%)' }}>
+                <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider text-muted-foreground">
                   Full Name
                 </label>
                 <input
@@ -331,20 +313,13 @@ const Login = () => {
                   required={!isLogin}
                   autoComplete="off"
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 rounded-xl text-[14px] transition-all duration-200 outline-none"
-                  style={{
-                    background: 'hsl(228 30% 10%)',
-                    border: '1px solid hsl(228 28% 18%)',
-                    color: 'white',
-                  }}
-                  onFocus={e => { e.target.style.border = '1px solid hsl(258 90% 66% / 0.5)'; e.target.style.boxShadow = '0 0 0 3px hsl(258 90% 66% / 0.1)'; }}
-                  onBlur={e => { e.target.style.border = '1px solid hsl(228 28% 18%)'; e.target.style.boxShadow = 'none'; }}
+                  className="input-base py-3 text-[14px]"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider" style={{ color: 'hsl(228 20% 50%)' }}>
+              <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider text-muted-foreground">
                 Email Address
               </label>
               <input
@@ -354,19 +329,12 @@ const Login = () => {
                 required
                 autoComplete="off"
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 rounded-xl text-[14px] transition-all duration-200 outline-none"
-                style={{
-                  background: 'hsl(228 30% 10%)',
-                  border: '1px solid hsl(228 28% 18%)',
-                  color: 'white',
-                }}
-                onFocus={e => { e.target.style.border = '1px solid hsl(258 90% 66% / 0.5)'; e.target.style.boxShadow = '0 0 0 3px hsl(258 90% 66% / 0.1)'; }}
-                onBlur={e => { e.target.style.border = '1px solid hsl(228 28% 18%)'; e.target.style.boxShadow = 'none'; }}
+                className="input-base py-3 text-[14px]"
               />
             </div>
 
             <div>
-              <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider" style={{ color: 'hsl(228 20% 50%)' }}>
+              <label className="block text-[12px] font-bold mb-1.5 uppercase tracking-wider text-muted-foreground">
                 Password
               </label>
               <div className="relative">
@@ -377,20 +345,12 @@ const Login = () => {
                   required
                   autoComplete="new-password"
                   placeholder="••••••••"
-                  className="w-full px-4 py-3 pr-12 rounded-xl text-[14px] transition-all duration-200 outline-none"
-                  style={{
-                    background: 'hsl(228 30% 10%)',
-                    border: '1px solid hsl(228 28% 18%)',
-                    color: 'white',
-                  }}
-                  onFocus={e => { e.target.style.border = '1px solid hsl(258 90% 66% / 0.5)'; e.target.style.boxShadow = '0 0 0 3px hsl(258 90% 66% / 0.1)'; }}
-                  onBlur={e => { e.target.style.border = '1px solid hsl(228 28% 18%)'; e.target.style.boxShadow = 'none'; }}
+                  className="input-base py-3 pr-12 text-[14px]"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 transition-colors"
-                  style={{ color: 'hsl(228 20% 45%)' }}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 transition-colors text-muted-foreground hover:text-foreground"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -404,7 +364,7 @@ const Login = () => {
               className="w-full py-3.5 px-6 rounded-xl text-[14px] font-extrabold text-white flex items-center justify-center gap-2 transition-all duration-200 mt-2"
               style={{
                 background: loading
-                  ? 'hsl(228 28% 18%)'
+                  ? 'hsl(var(--muted))'
                   : 'linear-gradient(135deg, hsl(258 90% 66%), hsl(258 75% 55%))',
                 boxShadow: loading ? 'none' : '0 4px 20px hsl(258 90% 66% / 0.4)',
                 transform: loading ? 'none' : undefined,
@@ -426,15 +386,12 @@ const Login = () => {
           {/* Toggle */}
           {role !== 'Admin' && (
             <div className="mt-6 text-center">
-              <p className="text-[13px]" style={{ color: 'hsl(228 20% 45%)' }}>
+              <p className="text-[13px] text-muted-foreground">
                 {isLogin ? "Don't have an account? " : 'Already have an account? '}
                 <button
                   type="button"
                   onClick={() => setIsLogin(!isLogin)}
-                  className="font-bold transition-colors"
-                  style={{ color: 'hsl(258 80% 75%)' }}
-                  onMouseEnter={e => e.currentTarget.style.color = 'hsl(258 90% 85%)'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'hsl(258 80% 75%)'}
+                  className="font-bold transition-colors text-primary hover:text-primary/80"
                 >
                   {isLogin ? 'Sign up' : 'Sign in'}
                 </button>
@@ -444,14 +401,7 @@ const Login = () => {
 
           {role === 'Admin' && isLogin && (
             <div className="mt-6 text-center">
-              <p
-                className="text-[11.5px] px-4 py-2 rounded-xl inline-block"
-                style={{
-                  color: 'hsl(228 20% 40%)',
-                  background: 'hsl(228 28% 10%)',
-                  border: '1px solid hsl(228 28% 15%)',
-                }}
-              >
+              <p className="text-[11.5px] px-4 py-2 rounded-xl inline-block text-muted-foreground bg-muted/80 border border-border">
                 🔐 Use admin credentials from your .env file
               </p>
             </div>

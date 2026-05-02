@@ -181,7 +181,7 @@ const Attendance = () => {
             <select
               value={subject}
               onChange={e => setSubject(e.target.value)}
-              className="w-full appearance-none pl-4 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer"
+              className="w-full appearance-none pl-4 pr-10 py-2.5 bg-card border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer"
             >
               {SUBJECTS.map(s => <option key={s}>{s}</option>)}
             </select>
@@ -193,7 +193,7 @@ const Attendance = () => {
               type="date"
               value={date}
               onChange={e => setDate(e.target.value)}
-              className="w-full pl-4 pr-10 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 text-sm cursor-pointer [color-scheme:dark]"
+              className="w-full pl-4 pr-10 py-2.5 bg-background border border-border text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary text-sm cursor-pointer [color-scheme:dark]"
               style={{
                 colorScheme: 'dark',
                 backgroundColor: 'var(--background)',
@@ -241,19 +241,19 @@ const Attendance = () => {
                   <div
                     key={student._id}
                     className={`p-4 sm:p-5 flex flex-col xl:flex-row xl:items-center justify-between gap-4 transition-colors ${
-                      isSaving ? 'bg-indigo-500/5' : 'hover:bg-muted/30'
+                      isSaving ? 'bg-primary/5' : 'hover:bg-muted/30'
                     }`}
                   >
                     {/* Student Info */}
                     <div className="flex items-center gap-3 min-w-[260px]">
-                      <div className="w-11 h-11 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-500 font-bold flex-shrink-0">
+                      <div className="w-11 h-11 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold flex-shrink-0">
                         {student.user?.name?.charAt(0) || 'S'}
                       </div>
                       <div>
                         <div className="font-semibold text-foreground flex items-center gap-2">
                           {student.user?.name || 'Unknown'}
                           {isSaving && (
-                            <span className="text-xs text-indigo-500 animate-pulse">saving...</span>
+                            <span className="text-xs text-primary animate-pulse">saving...</span>
                           )}
                         </div>
                         <div className="text-xs text-muted-foreground">
