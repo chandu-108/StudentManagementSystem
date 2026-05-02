@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Users, BookOpen, Building2, CalendarCheck, TrendingUp,
-  ArrowUpRight, Clock, BarChart2, Activity
+  Users, BookOpen, Building2, CalendarCheck,
+  ArrowUpRight, Clock, BarChart2, Activity, RefreshCw
 } from 'lucide-react';
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip,
@@ -98,19 +98,55 @@ const StatCard = ({ title, value, sub, icon: Icon, delay, styleIdx = 0 }) => {
   );
 };
 
+function formatAxiosError(err) {
+  const ct = err.response?.headers?.['content-type'];
+  if (typeof ct === 'string' && ct.includes('text/html')) {
+    return `Server returned HTML (HTTP ${err.response.status}) instead of JSON — fix API_BACKEND_URL on Vercel or ensure /api is not rewritten to index.html.`;
+  }
+  const data = err.response?.data;
+  if (!data) return err.message || 'Network error — check API URL and deployment.';
+  if (typeof data.message === 'string') return data.message;
+  if (typeof data.error === 'string') return data.error;
+  try {
+    return JSON.stringify(data);
+  } catch {
+    return err.message || 'Request failed';
+  }
+}
+
 export default function Dashboard() {
   const { user } = useAuth();
   const [stats, setStats] = useState(null);
   const [charts, setCharts] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [fetchError, setFetchError] = useState(null);
+  const [reloadKey, setReloadKey] = useState(0);
   const [activePieIdx, setActivePieIdx] = useState(0);
 
   useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+    setFetchError(null);
     Promise.all([api.get('/dashboard/stats'), api.get('/dashboard/charts')])
-      .then(([s, c]) => { setStats(s.data); setCharts(c.data); })
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+      .then(([s, c]) => {
+        if (!cancelled) {
+          setStats(s.data);
+          setCharts(c.data);
+          setFetchError(null);
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setStats(null);
+          setCharts(null);
+          setFetchError(formatAxiosError(err));
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [reloadKey]);
 
   const barData = charts?.barChartData?.length > 0 ? charts.barChartData
     : [{ name: 'CS', value: 0 }, { name: 'IT', value: 0 }];
@@ -133,8 +169,60 @@ export default function Dashboard() {
     </div>
   );
 
+  const dbLooksEmpty =
+    !fetchError &&
+    stats &&
+    charts &&
+    stats.totalStudents === 0 &&
+    stats.totalTeachers === 0 &&
+    (charts.barChartData?.length === 0 ||
+      charts.barChartData?.every((d) => !d.value));
+
   return (
     <div className="space-y-6">
+
+      {fetchError && (
+        <div className="rounded-2xl border border-destructive/35 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="font-semibold text-foreground">Dashboard could not load data from the API</p>
+              <p className="mt-1 opacity-95">{fetchError}</p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Vercel: set <code className="rounded bg-muted px-1 py-0.5 text-foreground">API_BACKEND_URL</code> and redeploy.
+                API host: set <code className="rounded bg-muted px-1 py-0.5 text-foreground">ALLOW_ANONYMOUS_ACCESS=true</code>{' '}
+                (and <code className="rounded bg-muted px-1 py-0.5 text-foreground">EMAIL_USER</code> /{' '}
+                <code className="rounded bg-muted px-1 py-0.5 text-foreground">EMAIL_PASS</code>). Open DevTools → Network and inspect{' '}
+                <code className="rounded bg-muted px-1 py-0.5 text-foreground">/api/dashboard/</code> requests.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setReloadKey((k) => k + 1)}
+              className="flex shrink-0 items-center gap-2 rounded-xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted/80"
+            >
+              <RefreshCw size={14} /> Retry
+            </button>
+          </div>
+        </div>
+      )}
+
+      {dbLooksEmpty && (
+        <div className="rounded-2xl border border-primary/25 bg-primary/5 px-4 py-3 text-sm text-foreground">
+          <p className="font-semibold">API is responding — database looks empty</p>
+          <p className="mt-1 text-muted-foreground">
+            Seed sample students and teachers once (opens in a new tab):{' '}
+            <a
+              href="/api/seed"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline underline-offset-2 hover:text-primary/90"
+            >
+              /api/seed
+            </a>
+            . Then refresh this page.
+          </p>
+        </div>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: -10 }}
@@ -153,20 +241,20 @@ export default function Dashboard() {
           </div>
           <div className="flex items-center gap-3">
             <div className="text-center rounded-xl px-4 py-2.5 bg-card/85 backdrop-blur-md border border-border">
-              <p className="text-2xl font-black text-foreground">{stats?.totalStudents || 0}</p>
+              <p className="text-2xl font-black text-foreground">{fetchError ? '—' : stats?.totalStudents ?? 0}</p>
               <p className="text-[10px] uppercase tracking-widest font-bold text-primary">Students</p>
             </div>
             <div
               className="text-center rounded-xl px-4 py-2.5 backdrop-blur-md border"
               style={{
-                background: attPct >= 75 ? 'hsl(160 84% 39% / 0.12)' : 'hsl(0 84% 60% / 0.1)',
-                borderColor: attPct >= 75 ? 'hsl(160 84% 39% / 0.35)' : 'hsl(0 84% 60% / 0.35)',
+                background: fetchError ? 'hsl(var(--muted) / 0.15)' : attPct >= 75 ? 'hsl(160 84% 39% / 0.12)' : 'hsl(0 84% 60% / 0.1)',
+                borderColor: fetchError ? 'hsl(var(--border))' : attPct >= 75 ? 'hsl(160 84% 39% / 0.35)' : 'hsl(0 84% 60% / 0.35)',
               }}
             >
-              <p className="text-2xl font-black text-foreground">{attPct}%</p>
+              <p className="text-2xl font-black text-foreground">{fetchError ? '—' : `${attPct}%`}</p>
               <p
-                className="text-[10px] uppercase tracking-widest font-bold"
-                style={{ color: attPct >= 75 ? 'hsl(160 84% 42%)' : 'hsl(0 72% 52%)' }}
+                className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground"
+                style={fetchError ? undefined : { color: attPct >= 75 ? 'hsl(160 84% 42%)' : 'hsl(0 72% 52%)' }}
               >
                 Attendance
               </p>
@@ -175,10 +263,12 @@ export default function Dashboard() {
         </div>
       </motion.div>
 
+      {!fetchError && (
+      <>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard title="Total Students" value={stats?.totalStudents || 0} sub="enrolled this semester" icon={Users} delay={0.05} styleIdx={0} />
-        <StatCard title="Faculty" value={stats?.totalTeachers || 0} sub="active instructors" icon={BookOpen} delay={0.1} styleIdx={1} />
-        <StatCard title="Departments" value={stats?.totalDepartments || 0} sub="academic divisions" icon={Building2} delay={0.15} styleIdx={2} />
+        <StatCard title="Total Students" value={stats?.totalStudents ?? 0} sub="enrolled this semester" icon={Users} delay={0.05} styleIdx={0} />
+        <StatCard title="Faculty" value={stats?.totalTeachers ?? 0} sub="active instructors" icon={BookOpen} delay={0.1} styleIdx={1} />
+        <StatCard title="Departments" value={stats?.totalDepartments ?? 0} sub="academic divisions" icon={Building2} delay={0.15} styleIdx={2} />
         <StatCard title="Attendance" value={`${attPct}%`} sub={attPct >= 75 ? '✓ On track' : '⚠ Needs attention'} icon={CalendarCheck} delay={0.2} styleIdx={3} />
       </div>
 
@@ -370,6 +460,8 @@ export default function Dashboard() {
           </div>
         </motion.div>
       </div>
+      </>
+      )}
     </div>
   );
 }
