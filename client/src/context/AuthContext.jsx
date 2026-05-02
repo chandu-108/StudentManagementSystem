@@ -3,9 +3,10 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 // ─── DEMO MODE ──────────────────────────────────────────────────────────────
-// Set DEMO_MODE = true  → skip login, always show dashboard as Admin
-// Set DEMO_MODE = false → restore normal login/signup flow
-const DEMO_MODE = true;
+// Must stay false for real API data: routes use JWT (protect middleware). Demo UI
+// skips login but never sends a token → empty lists / 401 on Vercel & fresh browsers.
+// Set true only for local UI mocks (still won’t load protected data without login).
+const DEMO_MODE = false;
 
 const DEMO_USER = {
   name: 'Admin User',
