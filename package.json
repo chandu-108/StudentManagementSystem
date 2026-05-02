@@ -2,6 +2,7 @@
   "name": "student-management-portal",
   "version": "1.0.0",
   "description": "Root project for Smart Student Management System",
+  "type": "module",
   "engines": {
     "node": ">=18"
   },
