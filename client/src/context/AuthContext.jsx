@@ -3,10 +3,9 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const AuthContext = createContext();
 
 // ─── DEMO MODE ──────────────────────────────────────────────────────────────
-// Must stay false for real API data: routes use JWT (protect middleware). Demo UI
-// skips login but never sends a token → empty lists / 401 on Vercel & fresh browsers.
-// Set true only for local UI mocks (still won’t load protected data without login).
-const DEMO_MODE = false;
+// Skip login/signup UI; dashboard opens immediately. API data requires the server
+// to set ALLOW_ANONYMOUS_ACCESS=true (uses first Admin user in DB — run /api/seed).
+const DEMO_MODE = true;
 
 const DEMO_USER = {
   name: 'Admin User',

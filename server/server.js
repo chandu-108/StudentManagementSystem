@@ -24,6 +24,12 @@ import bcrypt from 'bcryptjs';
 
 dotenv.config();
 
+if (process.env.ALLOW_ANONYMOUS_ACCESS === 'true') {
+  console.warn(
+    '[auth] ALLOW_ANONYMOUS_ACCESS=true — requests without a JWT are treated as the first Admin user. Do not use on public internet without understanding the risk.'
+  );
+}
+
 const app = express();
 
 // Middleware
@@ -38,6 +44,23 @@ const connectDB = async () => {
   try {
     const conn = await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/student-management');
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+
+    if (
+      process.env.ALLOW_ANONYMOUS_ACCESS === 'true' &&
+      process.env.EMAIL_USER &&
+      process.env.EMAIL_PASS
+    ) {
+      const hasAdmin = await User.exists({ role: 'Admin' });
+      if (!hasAdmin) {
+        await User.create({
+          name: 'System Admin',
+          email: process.env.EMAIL_USER,
+          password: process.env.EMAIL_PASS,
+          role: 'Admin',
+        });
+        console.log('[auth] Bootstrapped Admin user for anonymous API access.');
+      }
+    }
   } catch (error) {
     console.error(`Error: ${error.message}`);
     process.exit(1);
