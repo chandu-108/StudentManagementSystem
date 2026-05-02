@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout/Layout';
 
-import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Students from './pages/Students';
 import Attendance from './pages/Attendance';
@@ -13,24 +12,22 @@ import Grades from './pages/Grades';
 import Settings from './pages/Settings';
 import Scholarship from './pages/Scholarship';
 
-const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  if (loading) return <div className="p-10 text-foreground">Loading...</div>;
-  if (!user) return <Navigate to="/login" />;
-  return <Layout>{children}</Layout>;
-};
-
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-      <Route path="/students" element={<ProtectedRoute><Students /></ProtectedRoute>} />
-      <Route path="/attendance" element={<ProtectedRoute><Attendance /></ProtectedRoute>} />
-      <Route path="/teachers" element={<ProtectedRoute><Teachers /></ProtectedRoute>} />
-      <Route path="/grades" element={<ProtectedRoute><Grades /></ProtectedRoute>} />
-      <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
-      <Route path="/scholarship" element={<ProtectedRoute><Scholarship /></ProtectedRoute>} />
+      {/* Redirect /login to home — no login needed */}
+      <Route path="/login" element={<Navigate to="/" replace />} />
+
+      <Route path="/" element={<Layout><Dashboard /></Layout>} />
+      <Route path="/students" element={<Layout><Students /></Layout>} />
+      <Route path="/attendance" element={<Layout><Attendance /></Layout>} />
+      <Route path="/teachers" element={<Layout><Teachers /></Layout>} />
+      <Route path="/grades" element={<Layout><Grades /></Layout>} />
+      <Route path="/settings" element={<Layout><Settings /></Layout>} />
+      <Route path="/scholarship" element={<Layout><Scholarship /></Layout>} />
+
+      {/* Catch-all */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

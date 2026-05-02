@@ -34,28 +34,17 @@ async function connectDB() {
   isConnected = true;
   console.log(`MongoDB Connected: ${conn.connection.host}`);
 
-  if (
-    process.env.ALLOW_ANONYMOUS_ACCESS === 'true' &&
-    process.env.EMAIL_USER &&
-    process.env.EMAIL_PASS
-  ) {
-    const hasAdmin = await User.exists({ role: 'Admin' });
-    if (!hasAdmin) {
-      await User.create({
-        name: 'System Admin',
-        email: process.env.EMAIL_USER,
-        password: process.env.EMAIL_PASS,
-        role: 'Admin',
-      });
-      console.log('[auth] Bootstrapped Admin user.');
-    }
+  // Always ensure an Admin user exists (no login required)
+  const hasAdmin = await User.exists({ role: 'Admin' });
+  if (!hasAdmin) {
+    await User.create({
+      name: 'System Admin',
+      email: process.env.EMAIL_USER || 'admin@app.com',
+      password: process.env.EMAIL_PASS || 'admin123',
+      role: 'Admin',
+    });
+    console.log('[auth] Bootstrapped Admin user.');
   }
-}
-
-if (process.env.ALLOW_ANONYMOUS_ACCESS === 'true') {
-  console.warn(
-    '[auth] ALLOW_ANONYMOUS_ACCESS=true — requests without a JWT are treated as the first Admin user.'
-  );
 }
 
 const app = express();
