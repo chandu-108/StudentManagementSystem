@@ -22,16 +22,23 @@ module.exports = async (req, res) => {
     return;
   }
 
-  const slug = req.query.slug;
-  const tail = Array.isArray(slug) ? slug.join('/') : slug || '';
+  let pathname = req.url || '';
   let search = '';
   try {
     const u = new URL(req.url, 'http://local.test');
+    pathname = u.pathname || '';
     search = u.search || '';
   } catch {
-    const q = req.url.indexOf('?');
-    if (q !== -1) search = req.url.slice(q);
+    const q = pathname.indexOf('?');
+    if (q !== -1) {
+      search = pathname.slice(q);
+      pathname = pathname.slice(0, q);
+    }
   }
+
+  const prefix = '/api/';
+  const tail =
+    pathname.startsWith(prefix) ? pathname.slice(prefix.length).replace(/^\/+/, '') : '';
 
   const targetUrl = `${backend}/${tail}${search}`;
 
