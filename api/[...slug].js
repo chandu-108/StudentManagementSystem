@@ -1,6 +1,7 @@
 /**
- * Proxies /api/* to your Node backend so the browser stays same-origin (no CORS mix-ups).
- * Set API_BACKEND_URL in Vercel → Settings → Environment Variables (e.g. https://your-app.onrender.com/api).
+ * Proxies /api/* to your Node backend (same-origin in the browser).
+ * Vercel → Settings → Environment Variables:
+ *   API_BACKEND_URL=https://your-host.onrender.com/api   (HTTPS, include /api, no trailing slash)
  */
 function readBody(req) {
   return new Promise((resolve, reject) => {
@@ -9,6 +10,13 @@ function readBody(req) {
     req.on('end', () => resolve(Buffer.concat(chunks)));
     req.on('error', reject);
   });
+}
+
+function stripApiPath(pathname) {
+  const base = '/api';
+  if (pathname === base || pathname === `${base}/`) return '';
+  if (pathname.startsWith(`${base}/`)) return pathname.slice(base.length + 1);
+  return '';
 }
 
 module.exports = async (req, res) => {
@@ -36,11 +44,8 @@ module.exports = async (req, res) => {
     }
   }
 
-  const prefix = '/api/';
-  const tail =
-    pathname.startsWith(prefix) ? pathname.slice(prefix.length).replace(/^\/+/, '') : '';
-
-  const targetUrl = `${backend}/${tail}${search}`;
+  const tail = stripApiPath(pathname);
+  const targetUrl = tail ? `${backend}/${tail}${search}` : `${backend}/${search}`;
 
   /** @type {Parameters<typeof fetch>[1]} */
   const init = {
