@@ -1,8 +1,25 @@
 import axios from 'axios';
 
+function isLocalhostUrl(url) {
+  try {
+    const u = new URL(url, 'http://placeholder');
+    return u.hostname === 'localhost' || u.hostname === '127.0.0.1';
+  } catch {
+    return /localhost|127\.0\.0\.1/.test(url);
+  }
+}
+
 function resolveBaseURL() {
-  const fromEnv =
-    import.meta.env.VITE_API_URL && String(import.meta.env.VITE_API_URL).replace(/\/$/, '');
+  const raw = import.meta.env.VITE_API_URL && String(import.meta.env.VITE_API_URL).trim();
+  const fromEnv = raw ? raw.replace(/\/$/, '') : '';
+
+  if (import.meta.env.PROD && fromEnv && isLocalhostUrl(fromEnv)) {
+    console.warn(
+      '[API] VITE_API_URL points to localhost in production — using same-origin /api proxy. Set API_BACKEND_URL on Vercel instead.'
+    );
+    return '/api';
+  }
+
   if (fromEnv) return fromEnv;
   if (import.meta.env.DEV) return 'http://localhost:5000/api';
   return '/api';
